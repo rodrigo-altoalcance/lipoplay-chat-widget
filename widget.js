@@ -207,7 +207,13 @@
                 lines.forEach(function(line) {
                     line = line.trim();
                     if (!line) return;
-                    var boldMatch = line.match(/^\*\*(.+)\*\*$/);
+                    var titleText = null;
+                    var m1 = line.match(/^###\s*\d+\.?\s*\*\*(.+)\*\*$/);
+                    var m2 = line.match(/^\*\*(.+)\*\*$/);
+                    var m3 = line.match(/^###\s*\d+\.?\s*(.+)$/);
+                    if (m1) titleText = m1[1];
+                    else if (m2) titleText = m2[1];
+                    else if (m3) titleText = m3[1];
                     var priceMatch = line.match(/\*\*Precio:\s*(.+)\*\*/i) || line.match(/Precio:\s*(.+)/i);
                     var linkMatch = line.match(/\[Ver producto\]\((https?:\/\/[^\)]+)\)/i);
                     var warnMatch = line.match(/⚠️\s*(.+)/);
@@ -229,10 +235,10 @@
                         warn.className = 'lp-product-warning';
                         warn.textContent = '⚠️ ' + warnMatch[1].replace(/^["']|["']$/g, '');
                         card.appendChild(warn);
-                    } else if (boldMatch) {
+                    } else if (titleText) {
                         var title = document.createElement('span');
                         title.className = 'lp-product-title';
-                        title.textContent = boldMatch[1];
+                        title.textContent = titleText;
                         card.appendChild(title);
                     } else {
                         var desc = document.createElement('span');
