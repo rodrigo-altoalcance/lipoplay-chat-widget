@@ -31,11 +31,13 @@
         '#lp-chat-widget .lp-btn svg { width: 18px !important; height: 18px !important; fill: white !important; }' +
         '#lp-chat-widget .lp-messages { flex: 1 !important; overflow-y: auto !important; padding: 16px !important; display: flex !important; flex-direction: column !important; gap: 10px !important; background: #f5f7f5 !important; -webkit-overflow-scrolling: touch !important; overscroll-behavior: contain !important; touch-action: pan-y !important; }' +
         '#lp-chat-widget .lp-msg { max-width: 84% !important; display: flex !important; flex-direction: column !important; }' +
-        '#lp-chat-widget .lp-msg-content { padding: 10px 14px !important; border-radius: 16px !important; font-size: 14px !important; line-height: 1.5 !important; word-wrap: break-word !important; white-space: pre-wrap !important; }' +
+        '#lp-chat-widget .lp-msg-content { padding: 10px 14px !important; border-radius: 16px !important; font-size: 14px !important; line-height: 1.6 !important; word-wrap: break-word !important; }' +
         '#lp-chat-widget .lp-msg-user { align-self: flex-end !important; align-items: flex-end !important; }' +
         '#lp-chat-widget .lp-msg-user .lp-msg-content { background: #2e7d32 !important; color: white !important; border-bottom-right-radius: 4px !important; }' +
         '#lp-chat-widget .lp-msg-bot { align-self: flex-start !important; align-items: flex-start !important; }' +
         '#lp-chat-widget .lp-msg-bot .lp-msg-content { background: white !important; color: #333 !important; border-bottom-left-radius: 4px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important; }' +
+        '#lp-chat-widget .lp-product-btn { display: inline-block !important; margin-top: 8px !important; padding: 8px 16px !important; background: #2e7d32 !important; color: white !important; text-decoration: none !important; border-radius: 20px !important; font-size: 13px !important; font-weight: 600 !important; transition: background 0.2s !important; }' +
+        '#lp-chat-widget .lp-product-btn:hover { background: #1b5e20 !important; color: white !important; }' +
         '#lp-chat-widget .lp-typing { display: flex !important; gap: 4px !important; padding: 10px 14px !important; background: white !important; border-radius: 16px !important; border-bottom-left-radius: 4px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important; align-self: flex-start !important; }' +
         '#lp-chat-widget .lp-typing span { width: 8px !important; height: 8px !important; background: #2e7d32 !important; border-radius: 50% !important; animation: lpBounce 1.4s infinite ease-in-out !important; }' +
         '#lp-chat-widget .lp-typing span:nth-child(1) { animation-delay: -0.32s !important; }' +
@@ -154,12 +156,38 @@
         if (isMobile()) { setTimeout(updateViewportHeight, 100); }
     });
 
+    function parseMessage(text) {
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        var parts = text.split(urlRegex);
+        var fragment = document.createDocumentFragment();
+        parts.forEach(function(part) {
+            if (urlRegex.test(part)) {
+                var btn = document.createElement('a');
+                btn.href = part;
+                btn.target = '_blank';
+                btn.rel = 'noopener noreferrer';
+                btn.className = 'lp-product-btn';
+                btn.textContent = '🛒 Ver producto';
+                fragment.appendChild(document.createElement('br'));
+                fragment.appendChild(btn);
+            } else if (part.trim()) {
+                fragment.appendChild(document.createTextNode(part));
+            }
+        });
+        urlRegex.lastIndex = 0;
+        return fragment;
+    }
+
     function appendMessage(text, sender) {
         var div = document.createElement('div');
         div.className = 'lp-msg ' + (sender === 'user' ? 'lp-msg-user' : 'lp-msg-bot');
         var content = document.createElement('div');
         content.className = 'lp-msg-content';
-        content.textContent = text;
+        if (sender === 'bot') {
+            content.appendChild(parseMessage(text));
+        } else {
+            content.textContent = text;
+        }
         div.appendChild(content);
         messages.appendChild(div);
         messages.scrollTop = messages.scrollHeight;
