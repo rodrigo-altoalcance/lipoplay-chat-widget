@@ -17,7 +17,7 @@
         '#lp-chat-widget .lp-toggle { width: 62px !important; height: 62px !important; border-radius: 50% !important; background: #2e7d32 !important; border: none !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 4px 20px rgba(46,125,50,0.45) !important; transition: transform 0.3s, box-shadow 0.3s !important; touch-action: manipulation !important; }' +
         '#lp-chat-widget .lp-toggle:hover { transform: scale(1.08) !important; box-shadow: 0 6px 28px rgba(46,125,50,0.55) !important; }' +
         '#lp-chat-widget .lp-toggle svg { width: 28px !important; height: 28px !important; fill: white !important; }' +
-        '#lp-chat-widget .lp-window { position: fixed !important; bottom: 104px !important; right: 24px !important; width: 375px !important; height: 540px !important; background: white !important; border-radius: 18px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important; display: flex !important; flex-direction: column !important; overflow: hidden !important; border: 1px solid #e8e8e8 !important; }' +
+        '#lp-chat-widget .lp-window { position: fixed !important; bottom: 104px !important; right: 24px !important; width: 375px !important; height: 560px !important; background: white !important; border-radius: 18px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important; display: flex !important; flex-direction: column !important; overflow: hidden !important; border: 1px solid #e8e8e8 !important; }' +
         '#lp-chat-widget .lp-header { background: #2e7d32 !important; padding: 14px 18px !important; color: white !important; display: flex !important; justify-content: space-between !important; align-items: center !important; min-height: 64px !important; flex-shrink: 0 !important; }' +
         '#lp-chat-widget .lp-header-info { display: flex !important; align-items: center !important; gap: 11px !important; flex: 1 !important; }' +
         '#lp-chat-widget .lp-avatar { width: 42px !important; height: 42px !important; background: rgba(255,255,255,0.2) !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; font-weight: 600 !important; font-size: 15px !important; color: white !important; flex-shrink: 0 !important; border: 2px solid rgba(255,215,0,0.6) !important; }' +
@@ -29,15 +29,22 @@
         '#lp-chat-widget .lp-btn { width: 34px !important; height: 34px !important; border-radius: 50% !important; background: rgba(255,255,255,0.18) !important; border: none !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; transition: background 0.2s !important; touch-action: manipulation !important; }' +
         '#lp-chat-widget .lp-btn:hover { background: rgba(255,255,255,0.3) !important; }' +
         '#lp-chat-widget .lp-btn svg { width: 18px !important; height: 18px !important; fill: white !important; }' +
-        '#lp-chat-widget .lp-messages { flex: 1 !important; overflow-y: auto !important; padding: 16px !important; display: flex !important; flex-direction: column !important; gap: 10px !important; background: #f5f7f5 !important; -webkit-overflow-scrolling: touch !important; overscroll-behavior: contain !important; touch-action: pan-y !important; }' +
-        '#lp-chat-widget .lp-msg { max-width: 84% !important; display: flex !important; flex-direction: column !important; }' +
-        '#lp-chat-widget .lp-msg-content { padding: 10px 14px !important; border-radius: 16px !important; font-size: 14px !important; line-height: 1.6 !important; word-wrap: break-word !important; }' +
+        '#lp-chat-widget .lp-messages { flex: 1 !important; overflow-y: auto !important; padding: 12px !important; display: flex !important; flex-direction: column !important; gap: 8px !important; background: #f5f7f5 !important; -webkit-overflow-scrolling: touch !important; overscroll-behavior: contain !important; touch-action: pan-y !important; }' +
+        '#lp-chat-widget .lp-msg { max-width: 88% !important; display: flex !important; flex-direction: column !important; }' +
+        '#lp-chat-widget .lp-msg-content { padding: 10px 14px !important; border-radius: 16px !important; font-size: 14px !important; line-height: 1.55 !important; word-wrap: break-word !important; }' +
         '#lp-chat-widget .lp-msg-user { align-self: flex-end !important; align-items: flex-end !important; }' +
         '#lp-chat-widget .lp-msg-user .lp-msg-content { background: #2e7d32 !important; color: white !important; border-bottom-right-radius: 4px !important; }' +
-        '#lp-chat-widget .lp-msg-bot { align-self: flex-start !important; align-items: flex-start !important; }' +
-        '#lp-chat-widget .lp-msg-bot .lp-msg-content { background: white !important; color: #333 !important; border-bottom-left-radius: 4px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important; }' +
-        '#lp-chat-widget .lp-product-btn { display: inline-block !important; margin-top: 8px !important; padding: 8px 16px !important; background: #2e7d32 !important; color: white !important; text-decoration: none !important; border-radius: 20px !important; font-size: 13px !important; font-weight: 600 !important; transition: background 0.2s !important; }' +
-        '#lp-chat-widget .lp-product-btn:hover { background: #1b5e20 !important; color: white !important; }' +
+        '#lp-chat-widget .lp-msg-bot { align-self: flex-start !important; align-items: flex-start !important; width: 100% !important; max-width: 100% !important; }' +
+        '#lp-chat-widget .lp-msg-bot .lp-msg-content { background: white !important; color: #333 !important; border-bottom-left-radius: 4px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important; width: 100% !important; }' +
+        '#lp-chat-widget .lp-product-card { background: #f9fbf9 !important; border: 1px solid #d4edda !important; border-radius: 12px !important; padding: 12px 14px !important; margin: 6px 0 !important; }' +
+        '#lp-chat-widget .lp-product-title { font-weight: 700 !important; font-size: 14px !important; color: #1b5e20 !important; margin-bottom: 4px !important; display: block !important; }' +
+        '#lp-chat-widget .lp-product-desc { font-size: 13px !important; color: #555 !important; margin-bottom: 6px !important; display: block !important; }' +
+        '#lp-chat-widget .lp-product-price { font-size: 15px !important; font-weight: 700 !important; color: #2e7d32 !important; margin-bottom: 8px !important; display: block !important; }' +
+        '#lp-chat-widget .lp-product-warning { font-size: 12px !important; color: #e65100 !important; margin-bottom: 8px !important; display: block !important; }' +
+        '#lp-chat-widget .lp-product-btn { display: inline-block !important; padding: 7px 16px !important; background: #2e7d32 !important; color: white !important; text-decoration: none !important; border-radius: 20px !important; font-size: 13px !important; font-weight: 600 !important; transition: background 0.2s !important; }' +
+        '#lp-chat-widget .lp-product-btn:hover { background: #1b5e20 !important; color: white !important; text-decoration: none !important; }' +
+        '#lp-chat-widget .lp-divider { border: none !important; border-top: 1px solid #e8e8e8 !important; margin: 4px 0 !important; }' +
+        '#lp-chat-widget .lp-plain-text { white-space: pre-wrap !important; }' +
         '#lp-chat-widget .lp-typing { display: flex !important; gap: 4px !important; padding: 10px 14px !important; background: white !important; border-radius: 16px !important; border-bottom-left-radius: 4px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important; align-self: flex-start !important; }' +
         '#lp-chat-widget .lp-typing span { width: 8px !important; height: 8px !important; background: #2e7d32 !important; border-radius: 50% !important; animation: lpBounce 1.4s infinite ease-in-out !important; }' +
         '#lp-chat-widget .lp-typing span:nth-child(1) { animation-delay: -0.32s !important; }' +
@@ -156,10 +163,73 @@
         if (isMobile()) { setTimeout(updateViewportHeight, 100); }
     });
 
-    function parseMessage(text) {
-        var urlRegex = /(https?:\/\/[^\s]+)/g;
-        var parts = text.split(urlRegex);
+    function hasProductFormat(text) {
+        return /\*\*.*\*\*/.test(text) && /\[Ver producto\]/i.test(text);
+    }
+
+    function parseProductBlocks(text) {
         var fragment = document.createDocumentFragment();
+        var blocks = text.split(/---+/);
+        blocks.forEach(function(block) {
+            block = block.trim();
+            if (!block) return;
+            if (/\*\*.*\*\*/.test(block)) {
+                var card = document.createElement('div');
+                card.className = 'lp-product-card';
+                var lines = block.split('\n');
+                lines.forEach(function(line) {
+                    line = line.trim();
+                    if (!line) return;
+                    var boldMatch = line.match(/^\*\*(.+)\*\*$/);
+                    var priceMatch = line.match(/\*\*Precio:\s*(.+)\*\*/i) || line.match(/Precio:\s*(.+)/i);
+                    var linkMatch = line.match(/\[Ver producto\]\((https?:\/\/[^\)]+)\)/i);
+                    var warnMatch = line.match(/⚠️\s*(.+)/);
+                    if (linkMatch) {
+                        var btn = document.createElement('a');
+                        btn.href = linkMatch[1];
+                        btn.target = '_blank';
+                        btn.rel = 'noopener noreferrer';
+                        btn.className = 'lp-product-btn';
+                        btn.textContent = '🛒 Ver producto';
+                        card.appendChild(btn);
+                    } else if (priceMatch) {
+                        var price = document.createElement('span');
+                        price.className = 'lp-product-price';
+                        price.textContent = 'Precio: ' + priceMatch[1];
+                        card.appendChild(price);
+                    } else if (warnMatch) {
+                        var warn = document.createElement('span');
+                        warn.className = 'lp-product-warning';
+                        warn.textContent = '⚠️ ' + warnMatch[1].replace(/^["']|["']$/g, '');
+                        card.appendChild(warn);
+                    } else if (boldMatch) {
+                        var title = document.createElement('span');
+                        title.className = 'lp-product-title';
+                        title.textContent = boldMatch[1];
+                        card.appendChild(title);
+                    } else {
+                        var desc = document.createElement('span');
+                        desc.className = 'lp-product-desc';
+                        desc.textContent = line;
+                        card.appendChild(desc);
+                    }
+                });
+                fragment.appendChild(card);
+            } else {
+                var p = document.createElement('span');
+                p.className = 'lp-plain-text';
+                p.textContent = block;
+                fragment.appendChild(p);
+            }
+        });
+        return fragment;
+    }
+
+    function parseSimpleMessage(text) {
+        var fragment = document.createDocumentFragment();
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        var boldRegex = /\*\*(.+?)\*\*/g;
+        var parts = text.split(urlRegex);
         parts.forEach(function(part) {
             if (urlRegex.test(part)) {
                 var btn = document.createElement('a');
@@ -170,8 +240,17 @@
                 btn.textContent = '🛒 Ver producto';
                 fragment.appendChild(document.createElement('br'));
                 fragment.appendChild(btn);
-            } else if (part.trim()) {
-                fragment.appendChild(document.createTextNode(part));
+            } else {
+                var sub = part.split(boldRegex);
+                sub.forEach(function(s, i) {
+                    if (i % 2 === 1) {
+                        var b = document.createElement('strong');
+                        b.textContent = s;
+                        fragment.appendChild(b);
+                    } else if (s) {
+                        fragment.appendChild(document.createTextNode(s));
+                    }
+                });
             }
         });
         urlRegex.lastIndex = 0;
@@ -184,7 +263,11 @@
         var content = document.createElement('div');
         content.className = 'lp-msg-content';
         if (sender === 'bot') {
-            content.appendChild(parseMessage(text));
+            if (hasProductFormat(text)) {
+                content.appendChild(parseProductBlocks(text));
+            } else {
+                content.appendChild(parseSimpleMessage(text));
+            }
         } else {
             content.textContent = text;
         }
