@@ -86,7 +86,7 @@
         '<button class="lp-btn lp-close" aria-label="Cerrar chat" title="Cerrar chat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>' +
         '</div>' +
         '</div>' +
-        '<div class="lp-messages"><div class="lp-msg lp-msg-bot"><div class="lp-msg-content">¡Hola! Soy Cristina 👋 ¿En qué puedo ayudarte hoy?</div></div></div>' +
+        '<div class="lp-messages"></div>' +
         '<div class="lp-input-wrap">' +
         '<form class="lp-form"><input type="text" class="lp-input" placeholder="Escribe tu mensaje..." autocomplete="off"><button type="submit" class="lp-send" aria-label="Enviar mensaje"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button></form>' +
         '</div>' +
@@ -102,10 +102,37 @@
     container.innerHTML = html;
     document.body.appendChild(container.firstChild);
 
-    var sessionId = sessionStorage.getItem('lp_chat_session');
+    var sessionId = localStorage.getItem('lp_chat_session');
     if (!sessionId) {
         sessionId = 'lp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        sessionStorage.setItem('lp_chat_session', sessionId);
+        localStorage.setItem('lp_chat_session', sessionId);
+    }
+
+    function saveMessages() {
+        var msgs = [];
+        var msgDivs = messages.querySelectorAll('.lp-msg');
+        msgDivs.forEach(function(div) {
+            msgs.push({ html: div.innerHTML, cls: div.className });
+        });
+        localStorage.setItem('lp_chat_messages', JSON.stringify(msgs));
+    }
+
+    function loadMessages() {
+        var saved = localStorage.getItem('lp_chat_messages');
+        if (!saved) return false;
+        try {
+            var msgs = JSON.parse(saved);
+            if (!msgs || msgs.length === 0) return false;
+            messages.innerHTML = '';
+            msgs.forEach(function(m) {
+                var div = document.createElement('div');
+                div.className = m.cls;
+                div.innerHTML = m.html;
+                messages.appendChild(div);
+            });
+            messages.scrollTop = messages.scrollHeight;
+            return true;
+        } catch(e) { return false; }
     }
 
     var widget = document.getElementById('lp-chat-widget');
@@ -274,6 +301,7 @@
         div.appendChild(content);
         messages.appendChild(div);
         messages.scrollTop = messages.scrollHeight;
+        saveMessages();
     }
 
     function showTyping() {
@@ -291,8 +319,9 @@
     }
 
     function resetChat() {
+        localStorage.removeItem('lp_chat_messages');
         sessionId = 'lp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        sessionStorage.setItem('lp_chat_session', sessionId);
+        localStorage.setItem('lp_chat_session', sessionId);
         messages.innerHTML = '';
         appendMessage('¡Hola! Soy Cristina 👋 ¿En qué puedo ayudarte hoy?', 'bot');
         input.focus();
@@ -331,6 +360,10 @@
             sendBtn.disabled = false;
             input.focus();
         }
+    }
+
+    if (!loadMessages()) {
+        appendMessage('¡Hola! Soy Cristina 👋 ¿En qué puedo ayudarte hoy?', 'bot');
     }
 
     toggle.addEventListener('click', toggleChat);
