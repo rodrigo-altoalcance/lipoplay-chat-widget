@@ -19,6 +19,9 @@ LOCATION_NAMES = {
 CARRITOS_TEMPORALES = {}
 CARRITO_EXPIRATION_SECONDS = 3600
 
+# Tags que indican que un producto está en reserva (ajustá según los tags reales de tu tienda)
+RESERVA_TAGS = {'reserva', 'pre-order', 'preorder', 'pre orden', 'en reserva', 'sin stock'}
+
 
 def limpiar_carritos_viejos():
     ahora = time.time()
@@ -245,12 +248,19 @@ def format_product_info(products):
             })
 
         handle = product.get('handle', '')
+        raw_tags = product.get('tags', '')
+        tags = [t.strip() for t in raw_tags.split(',') if t.strip()] if raw_tags else []
+        tags_lower = {t.lower() for t in tags}
+        en_reserva = bool(tags_lower & RESERVA_TAGS)
+
         formatted.append({
             "product_id": product.get('id'),
             "name": product.get('title'),
             "description": product.get('body_html', 'Sin descripción'),
             "price": product['variants'][0].get('price') if product.get('variants') else None,
             "total_stock": total_stock,
+            "en_reserva": en_reserva,
+            "tags": tags,
             "link": f"https://{SHOPIFY_STORE_NAME}.myshopify.com/products/{handle}",
             "variants": variants,
         })
@@ -282,13 +292,18 @@ def get_top_matching_products(search_term, limit=4):
 
     for product in products:
         title = product['title']
+        raw_tags = product.get('tags', '')
+        product_tags = [t.strip() for t in raw_tags.split(',') if t.strip()] if raw_tags else []
+        # Combinar título + tags para el matching de keywords
+        title_and_tags = title + ' ' + ' '.join(product_tags)
+
         product_specs = extract_technical_specs(title, search_specs.get('voltage'))
 
         max_len = max(len(search_term), len(title))
         text_sim = 1 - levenshtein_distance(search_term.lower(), title.lower()) / max_len if max_len else 0
 
-        keyword = calculate_keyword_match(search_term, title)
-        category = calculate_category_match(search_term, title)
+        keyword = calculate_keyword_match(search_term, title_and_tags)
+        category = calculate_category_match(search_term, title_and_tags)
         spec_sim = calculate_spec_similarity(search_specs, product_specs)
 
         if category < 0:
