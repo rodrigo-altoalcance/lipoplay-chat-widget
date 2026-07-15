@@ -20,7 +20,7 @@ CARRITOS_TEMPORALES = {}
 CARRITO_EXPIRATION_SECONDS = 3600
 
 # Tags que indican que un producto está en reserva (ajustá según los tags reales de tu tienda)
-RESERVA_TAGS = {'reserva', 'pre-order', 'preorder', 'pre orden', 'en reserva', 'sin stock'}
+RESERVA_TAGS = {'reserva'}
 
 
 def limpiar_carritos_viejos():
